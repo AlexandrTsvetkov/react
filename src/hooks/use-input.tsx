@@ -33,7 +33,7 @@ type UseInput = {
   value: string;
   isValid: boolean;
   hasError: boolean;
-  valueChangedHandler: (event: React.FormEvent<HTMLInputElement>) => void;
+  valueChangedHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   blurChangedHandler: () => void;
   reset: () => void;
 };
@@ -44,8 +44,8 @@ const useInput = (validateValue: (value: string) => boolean): UseInput => {
   const isValid = validateValue(state.value);
   const hasError = !isValid && state.isTouched;
 
-  const valueChangedHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    dispatch({ type: "CHANGED", payload: event.currentTarget.value });
+  const valueChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: "CHANGED", payload: event.target.value });
   };
 
   const blurChangedHandler = () => {
